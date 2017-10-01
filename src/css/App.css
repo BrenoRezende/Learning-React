@@ -1,0 +1,16 @@
+.content {
+   text-align: center;
+   margin-top: 2%;
+}
+
+.pure-form-aligned .pure-control-group label {
+   width: 71px;
+}
+
+.pure-form-aligned .pure-control-group input {
+   margin-left: 2%;
+}
+
+.pure-table {
+   margin: 4% auto;
+}
