@@ -2,19 +2,26 @@ import React, {Component} from 'react';
 import './css/pure-min.css';
 import './css/side-menu.css';
 import './css/App.css';
+import axios from 'axios'
 
 class App extends Component {
+
    constructor() {
       super();
       this.state = {
-         list: [
-            {
-               name: 'Breno',
-               email: 'brenorrezende@gmail.com',
-               password: '123456'
-            }
-         ]
+         list: []
       };
+   }
+
+   componentWillMount() {
+      axios.get('http://cdc-react.herokuapp.com/api/autores')
+         .then(function(result) {
+            console.log(result);
+            this.setState({list:result.data});
+         }.bind(this))
+         .catch(function(error) {
+            console.log(error);
+         });
    }
 
    render() {
@@ -83,7 +90,7 @@ class App extends Component {
                               this.state.list.map(function(author) {
                                  return (
                                     <tr>
-                                       <td>{author.name}</td>
+                                       <td>{author.nome}</td>
                                        <td>{author.email}</td>
                                     </tr>
                                  );
