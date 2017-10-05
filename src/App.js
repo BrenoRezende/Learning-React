@@ -13,7 +13,7 @@ class App extends Component {
       };
    }
 
-   componentWillMount() {
+   componentDidMount() {
       axios.get('http://cdc-react.herokuapp.com/api/autores')
          .then(function(result) {
             console.log(result);
@@ -89,12 +89,12 @@ class App extends Component {
                            {
                               this.state.list.map(function(author) {
                                  return (
-                                    <tr>
+                                    <tr key={author.id}>
                                        <td>{author.nome}</td>
                                        <td>{author.email}</td>
                                     </tr>
                                  );
-                              })
+                             })
                            }
                         </tbody>
                      </table>
