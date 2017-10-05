@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import './css/pure-min.css';
 import './css/side-menu.css';
 import './css/App.css';
-import axios from 'axios'
+import axios from 'axios';
+import CustomInput from './components/CustomInput.js';
 
 class App extends Component {
 
@@ -38,8 +39,9 @@ class App extends Component {
            senha:this.state.password
        }).then(function(result) {
            console.log("Sent");
-       }).catch(function(result) {
-           console.log("error");
+           this.setState({list: result.data});
+       }.bind(this)).catch(function(result) {
+           console.log(result);
        });
    }
 
@@ -89,18 +91,9 @@ class App extends Component {
                <div className="content" id="content">
                   <div className="pure-form pure-form-aligned">
                      <form className="pure-form pure-form-aligned" onSubmit={this.sendForm} method="post">
-                        <div className="pure-control-group">
-                           <label htmlFor="nome">Name</label>
-                           <input id="nome" type="text" name="nome" value={this.state.name} onChange={this.setName}/>
-                        </div>
-                        <div className="pure-control-group">
-                           <label htmlFor="email">Email</label>
-                           <input id="email" type="email" name="email" value={this.state.email} onChange={this.setEmail}/>
-                        </div>
-                        <div className="pure-control-group">
-                           <label htmlFor="senha">Password</label>
-                           <input id="senha" type="password" name="senha" value={this.state.password} onChange={this.setPassword}/>
-                        </div>
+                         <CustomInput id="name" type="text" name="name" value={this.state.name} onChange={this.setName} label="Name"/>
+                         <CustomInput id="email" type="email" name="email" value={this.state.email} onChange={this.setEmail} label="Email"/>
+                         <CustomInput id="password" type="password" name="password" value={this.state.password} onChange={this.setPassword} label="Password"/>
                         <div className="pure-control-group">
                            <label></label>
                            <button type="submit" className="pure-button pure-button-primary">Send</button>
