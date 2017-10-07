@@ -10,7 +10,9 @@ export default class CustomInput extends Component {
 
     componentWillMount() {
         PubSub.subscribe('form-error', function(topic, error) {
-            this.setState({errorMsg: error.defaultMessage});
+           if (error.field === this.props.name) {
+             this.setState({errorMsg: error.defaultMessage});
+           }
         }.bind(this));
     }
 

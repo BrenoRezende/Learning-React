@@ -30,7 +30,8 @@ class AuthorForm extends Component {
         .then(function(result) {
             console.log("Sent");
             PubSub.publish('author-list-updated', result.data);
-        })
+            this.setState({name: '', email: '', password: ''});
+        }.bind(this))
         .catch(function(result) {
             var response = result.response.data;
             if (response.status === 400) {
