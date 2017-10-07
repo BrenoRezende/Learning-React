@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import AuthorBox from './Author';
+import {Link} from 'react-router-dom';
 import './css/pure-min.css';
 import './css/side-menu.css';
 import './css/App.css';
@@ -21,13 +21,13 @@ class App extends Component {
 
                   <ul className="pure-menu-list">
                      <li className="pure-menu-item">
-                        <a href="#" className="pure-menu-link">Home</a>
+                        <Link to="/" className="pure-menu-link">Home</Link>
                      </li>
                      <li className="pure-menu-item">
-                        <a href="#" className="pure-menu-link">Author</a>
+                        <Link to="/author" className="pure-menu-link">Author</Link>
                      </li>
                      <li className="pure-menu-item">
-                        <a href="#" className="pure-menu-link">Books</a>
+                        <Link to="/" className="pure-menu-link">Books</Link>
                      </li>
                   </ul>
                </div>
@@ -35,10 +35,9 @@ class App extends Component {
 
             <div id="main">
                <div className="header">
-                  <h1>Author's Register</h1>
+                  <h1>Welcome</h1>
                </div>
                <div className="content" id="content">
-                   <AuthorBox />
                </div>
             </div>
 
