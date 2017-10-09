@@ -17,7 +17,7 @@ class App extends Component {
 
             <div id="menu">
                <div className="pure-menu">
-                  <a className="pure-menu-heading" href="#">Company</a>
+                  <Link to="/" className="pure-menu-heading">Company</Link>
 
                   <ul className="pure-menu-list">
                      <li className="pure-menu-item">
@@ -27,18 +27,14 @@ class App extends Component {
                         <Link to="/author" className="pure-menu-link">Author</Link>
                      </li>
                      <li className="pure-menu-item">
-                        <Link to="/" className="pure-menu-link">Books</Link>
+                        <Link to="/book" className="pure-menu-link">Books</Link>
                      </li>
                   </ul>
                </div>
             </div>
 
             <div id="main">
-               <div className="header">
-                  <h1>Welcome</h1>
-               </div>
-               <div className="content" id="content">
-               </div>
+                {this.props.children}
             </div>
 
          </div>
