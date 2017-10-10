@@ -10,7 +10,7 @@ export default class CustomInput extends Component {
 
     componentWillMount() {
         PubSub.subscribe('form-error', function(topic, error) {
-           if (error.field === this.props.ptName) {
+           if (error.field === this.props.ptname) {
              this.setState({errorMsg: error.defaultMessage});
            }
         }.bind(this));
@@ -24,7 +24,9 @@ export default class CustomInput extends Component {
         return(
             <div className="pure-control-group">
                <label htmlFor={this.props.id}>{this.props.label}</label>
-               <input id={this.props.id} type={this.props.type} name={this.props.name} value={this.props.value} onChange={this.props.onChange}/>
+               {/* <input id={this.props.id} type={this.props.type} name={this.props.name} value={this.props.value} onChange={this.props.onChange}/> */}
+               {/* The below input is using JSX Spread Attributes */}
+               <input {...this.props}/>
                <span className="errors">{this.state.errorMsg}</span>
             </div>
         );
