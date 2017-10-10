@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import PubSub from 'pubsub-js';
 import CustomInput from './components/CustomInput';
+import ErrorHandler from './ErrorHandler';
 
 export default class BookBox extends Component {
 
@@ -50,6 +51,8 @@ export default class BookBox extends Component {
    }
 }
 
+/*----------------------------------- Form -----------------------------------*/
+
 class BookForm extends Component {
    constructor() {
       super();
@@ -90,17 +93,24 @@ class BookForm extends Component {
           this.setState({title: '', price: '', authorId: ''});
       }.bind(this))
       .catch(function(result) {
+          var response = result.response.data;
+          if (response.status === 400) {
+              new ErrorHandler().publishErrors(response.errors);
+          }
       });
+
+      PubSub.publish('clear-error-msg');
    }
 
    render() {
       return (
          <div className="pure-form pure-form-aligned">
             <form className="pure-form pure-form-aligned" onSubmit={this.sendForm}>
-               <CustomInput id="title" type="text" name="title" value={this.state.title} onChange={this.setTitle} label="Title"/>
-               <CustomInput id="price" type="text" name="price" value={this.state.price} onChange={this.setPrice} label="Price"/>
+               <CustomInput id="title" type="text" name="title" value={this.state.title} onChange={this.setTitle} label="Title" ptName="titulo"/>
+               <CustomInput id="price" type="text" name="price" value={this.state.price} onChange={this.setPrice} label="Price" ptName="preco"/>
                <div className="pure-control-group">
-                  <select value={this.state.authorId} name="authorId" onChange={this.setAuthorId}>
+                   <label htmlFor="authorId">Author</label>
+                  <select value={this.state.authorId} name="authorId" id="authorId" onChange={this.setAuthorId}>
                      <option value="">Select</option>
                      {
                         this.props.authors.map(function(author) {
@@ -118,6 +128,8 @@ class BookForm extends Component {
       );
    }
 }
+
+/*----------------------------------- List -----------------------------------*/
 
 class BookList extends Component {
    render() {

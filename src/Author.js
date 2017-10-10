@@ -38,6 +38,8 @@ class AuthorForm extends Component {
                 new ErrorHandler().publishErrors(response.errors);
             }
         });
+
+        PubSub.publish('clear-error-msg');
     }
 
     setName(event) {
@@ -56,9 +58,9 @@ class AuthorForm extends Component {
         return(
             <div className="pure-form pure-form-aligned">
                <form className="pure-form pure-form-aligned" onSubmit={this.sendForm} method="post">
-                   <CustomInput id="name" type="text" name="name" value={this.state.name} onChange={this.setName} label="Name"/>
-                   <CustomInput id="email" type="email" name="email" value={this.state.email} onChange={this.setEmail} label="Email"/>
-                   <CustomInput id="password" type="password" name="password" value={this.state.password} onChange={this.setPassword} label="Password"/>
+                   <CustomInput id="name" type="text" name="name" value={this.state.name} onChange={this.setName} label="Name" ptName="nome"/>
+                   <CustomInput id="email" type="email" name="email" value={this.state.email} onChange={this.setEmail} label="Email" ptName="email"/>
+                   <CustomInput id="password" type="password" name="password" value={this.state.password} onChange={this.setPassword} label="Password" ptName="senha"/>
                   <div className="pure-control-group">
                      <label></label>
                      <button type="submit" className="pure-button pure-button-primary">Send</button>
